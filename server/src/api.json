@@ -1,0 +1,100 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MyApi",
+    "description": "All your API belong to us.",
+    "version": "3.14"
+  },
+  "tags": [
+    {
+      "name": "FizzBuzz"
+    }
+  ],
+  "paths": {
+    "/hello": {
+      "get": {
+        "summary": "Hello World",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HelloResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fizzBuzz": {
+      "put": {
+        "tags": [
+          "FizzBuzz"
+        ],
+        "description": "Save the FizzBuzz state",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FizzBuzzBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FizzBuzz"
+        ],
+        "description": "Retrieve the FizzBuzz state",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FizzBuzzBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HelloResponse": {
+        "required": [
+          "hello"
+        ],
+        "type": "object",
+        "properties": {
+          "hello": {
+            "type": "string",
+            "example": "world"
+          }
+        }
+      },
+      "FizzBuzzBody": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}
