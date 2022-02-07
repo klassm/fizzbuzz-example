@@ -4,6 +4,8 @@ import * as OpenApiValidator from 'express-openapi-validator';
 import { Server } from "http";
 import { Routes } from "./Routes";
 import cors from "cors";
+import * as swaggerUi from "swagger-ui-express";
+import apiDocs from "./api.json";
 
 export class Application {
   private server: Server | undefined;
@@ -16,9 +18,9 @@ export class Application {
 
     app.use(cors())
     app.use(bodyParser.json());
-    const path = __dirname + "/api.json";
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs));
     app.use(OpenApiValidator.middleware({
-      apiSpec: path,
+      apiSpec: apiDocs as any,
       validateRequests: true,
       validateResponses: true,
       ignoreUndocumented: false,
